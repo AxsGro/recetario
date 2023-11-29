@@ -8,13 +8,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Material App',
+      title: 'Recetario App',
       initialRoute: '/', // Página inicial
       routes: {
         '/': (context) => const HomeView(),
         '/first': (context) => const FirstView(),
         '/second': (context) => const SecondView(),
         '/third': (context) => const ThirdView(),
+        '/fourth': (context) => const FourthView(),
       },
     );
   }
@@ -30,14 +31,33 @@ class HomeView extends StatelessWidget {
         title: const Text('Vista Principal'),
       ),
       body: Center(
-        child: Row(
+        child: Column(
           children: [
-            ElevatedButton(
-              onPressed: (){
-                print('Boton presionado');
-              }, 
-              child: const Text('Food'))
-          ],
+            Row(
+              children:[
+                ElevatedButton(
+                  onPressed: (){
+                    print('Boton presionado');
+                  }, 
+                  child: const Text('Food')),
+                ElevatedButton(
+                  onPressed: (){
+                    print('Boton presionado');
+                  }, 
+                  child: const Text('Drink')),
+                ElevatedButton(
+                  onPressed: (){
+                    print('Boton presionado');
+                  }, 
+                  child: const Text('Sauces')),
+                ElevatedButton(
+                  onPressed: (){
+                    print('Boton presionado');
+                  }, 
+                  child: const Text('Snacks')),
+              ],//row children
+            ),
+          ],//column children
         ),
       ),
       drawer: Drawer(
@@ -106,7 +126,7 @@ class SecondView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Segunda Vista'),
+        title: const Text('Menu'),
       ),
       body: const Center(
         child: Text('Contenido segunda vista'),
@@ -122,10 +142,26 @@ class ThirdView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tercera Vista'),
+        title: const Text('Crear receta'),
       ),
       body: const Center(
         child: Text('Contenido tercera vista'),
+      ),
+    );
+  }
+}
+
+class FourthView extends StatelessWidget {
+  const FourthView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Editar receta'),
+      ),
+      body: const Center(
+        child: Text('Contenido cuarta vista'),
       ),
     );
   }
