@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
-
+//Clase para controlar RecipeCard
 class RecipeCard {
   final String title;
   final String imagePath;
@@ -217,7 +217,7 @@ class _HomeViewState extends State<HomeView> {
       drawer: Drawer(
         child: ListView(
           children: [
-            DrawerHeader(
+            const DrawerHeader(
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
@@ -304,13 +304,77 @@ class FirstView extends StatelessWidget {
   const FirstView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+    Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Perfil'),
       ),
-      body: const Center(
-        child: Text('Contenido Perfil'),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 50,
+                  backgroundColor: Colors.grey,
+                  child: IconButton(
+                    icon: Icon(Icons.camera_alt),
+                    onPressed: () {
+                      
+                    },
+                  ),
+                ),
+                const SizedBox(height: 10),
+                const Text(
+                  'Nombre: Pablo123',
+                  style: TextStyle(fontSize: 18),
+                ),
+                const SizedBox(height: 10),
+                const Text(
+                  'Correo: Pablo123@gmail.com',
+                  style: TextStyle(fontSize: 18),
+                ),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    
+                  },
+                  child: const Text('Mis Listas'),
+                ),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    
+                  },
+                  child: const Text('Likes'),
+                ),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    
+                  },
+                  child: const Text('Mis Recetas'),
+                ),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    
+                  },
+                  child: const Text('Mi cuenta'),
+                ),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    
+                  },
+                  child: const Text('Cerrar Sesión'),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -325,8 +389,64 @@ class SecondView extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Crear receta'),
       ),
-      body: const Center(
-        child: Text('Contenido segunda vista'),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                radius: 50,
+                backgroundColor: Colors.grey, 
+                child: IconButton(
+                  icon: Icon(Icons.camera_alt),
+                  onPressed: () {
+
+                  },
+                ),
+              ),
+              const SizedBox(height: 16),              
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Título',
+                  hintText: 'Introduce el título de la receta',
+                ),
+              ),
+              const SizedBox(height: 16),             
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Descripción',
+                  hintText: 'Introduce una descripción de la receta',
+                ),
+                maxLines: 1, 
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Ingredientes',
+                  hintText: 'Introduce los ingredientes de la receta',
+                ),
+                maxLines: 1, 
+              ),
+              const SizedBox(height: 16),              
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Pasos',
+                  hintText: 'Introduce los pasos de la receta',
+                ),
+                maxLines: 1, 
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () { 
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/');                               
+                },
+                child: const Text('Guardar Receta'),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -402,8 +522,8 @@ class _EditRecipeFormState extends State<EditRecipeForm> {
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState?.validate() ?? false) {
-                    // Aquí puedes guardar los datos o realizar alguna acción
-                    // como enviar los datos a una API, base de datos, etc.
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/');
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text('Receta actualizada exitosamente'),
