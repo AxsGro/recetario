@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const HomeView(),
         '/first': (context) => const FirstView(),
         '/second': (context) => const SecondView(),
-        '/third': (context) => const ThirdView(),
+        '/third': (context) => const EditRecipeForm(),
       },
     );
   }
@@ -332,17 +332,90 @@ class SecondView extends StatelessWidget {
   }
 }
 
-class ThirdView extends StatelessWidget {
-  const ThirdView({Key? key}) : super(key: key);
+class EditRecipeForm extends StatefulWidget {
+  const EditRecipeForm({Key? key}) : super(key: key);
+
+  @override
+  _EditRecipeFormState createState() => _EditRecipeFormState();
+}
+
+class _EditRecipeFormState extends State<EditRecipeForm> {
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+  TextEditingController ingredientsController = TextEditingController();
+  TextEditingController stepsController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Editar receta'),
+        title: const Text('Editar Receta'),
       ),
-      body: const Center(
-        child: Text('Contenido tercer vista'),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              TextFormField(
+                controller: titleController,
+                decoration: const InputDecoration(labelText: 'Título'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Por favor, ingresa un título';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                controller: descriptionController,
+                decoration: const InputDecoration(labelText: 'Descripción'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Por favor, ingresa una descripción';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                controller: ingredientsController,
+                decoration: const InputDecoration(labelText: 'Ingredientes'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Por favor, ingresa los ingredientes';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                controller: stepsController,
+                decoration: const InputDecoration(labelText: 'Pasos'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Por favor, ingresa los pasos';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState?.validate() ?? false) {
+                    // Aquí puedes guardar los datos o realizar alguna acción
+                    // como enviar los datos a una API, base de datos, etc.
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Receta actualizada exitosamente'),
+                      ),
+                    );
+                  }
+                },
+                child: const Text('Actualizar Receta'),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
